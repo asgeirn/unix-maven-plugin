@@ -92,6 +92,7 @@ public class PkgUnixPackage
             desc( parameters.description ).
             email( parameters.contactEmail ).
             pstamp( some( parameters.version.timestamp ) ).
+            basedir( parameters.basedir ).
             email( parameters.contactEmail );
 
         return this;
@@ -130,9 +131,10 @@ public class PkgUnixPackage
     // Pkg Specific Settings
     // -----------------------------------------------------------------------
 
-    public PkgUnixPackage pkgParameters( List<String> classes, Option<String> category )
+    public PkgUnixPackage pkgParameters( List<String> classes, Option<String> category, Option<String> basedir )
     {
         pkginfoFile = pkginfoFile.
+            basedir( basedir ).
             category( category.orSome( pkginfoFile.category ) ).
             classes( classes );
 

@@ -59,6 +59,6 @@ public class PkgMojoUtil
 //        }
 
         return PkgUnixPackage.cast( unixPackage ).
-            pkgParameters( pkg.classes, pkg.category );
+            pkgParameters( pkg.classes, pkg.category, pkg.basedir );
     }
 }

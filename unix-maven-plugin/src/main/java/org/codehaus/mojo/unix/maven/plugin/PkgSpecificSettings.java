@@ -39,7 +39,9 @@ public class PkgSpecificSettings
 
     public Option<String> category = none();
 
-    private String[] extraPrototype = new String[0];
+    public Option<String> basedir = none();
+
+    private final String[] extraPrototype = new String[0];
 
     public void setClasses( String classes )
     {
@@ -54,5 +56,10 @@ public class PkgSpecificSettings
     public String[] getExtraPrototype()
     {
         return extraPrototype;
+    }
+
+    public void setBasedir( String basedir )
+    {
+        this.basedir = fromNull( basedir );
     }
 }

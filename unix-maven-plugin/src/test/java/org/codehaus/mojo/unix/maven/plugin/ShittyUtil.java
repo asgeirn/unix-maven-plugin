@@ -30,6 +30,7 @@ import static fj.data.HashMap.*;
 import static fj.data.Stream.*;
 import groovy.lang.*;
 import org.codehaus.mojo.unix.*;
+
 import static org.codehaus.mojo.unix.FileAttributes.*;
 import static org.codehaus.mojo.unix.UnixFsObject.*;
 import org.codehaus.mojo.unix.deb.*;
@@ -389,6 +390,7 @@ public class ShittyUtil
                         optionStringEqual.eq( tis.pstamp, that.pstamp ) &&
                         optionStringEqual.eq( tis.desc, that.desc ) &&
                         optionStringEqual.eq( tis.email, that.email ) &&
+                        optionStringEqual.eq( tis.basedir, that.basedir ) &&
                         listStringEqual.eq( tis.classes, that.classes );
                 }
             };
