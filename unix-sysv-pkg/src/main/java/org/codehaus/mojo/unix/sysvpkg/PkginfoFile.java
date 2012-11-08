@@ -57,10 +57,9 @@ public class PkginfoFile
     public final Option<String> desc;
     public final Option<String> email;
     public final List<String> classes;
-    public final Option<String> basedir;
 
     public PkginfoFile( String arch, String category, String name, String pkg, String version, Option<String> pstamp,
-                        Option<String> desc, Option<String> email, List<String> classes, Option<String> basedir )
+                        Option<String> desc, Option<String> email, List<String> classes )
     {
         this.arch = arch;
         this.category = category;
@@ -71,13 +70,12 @@ public class PkginfoFile
         this.desc = desc;
         this.email = email;
         this.classes = classes;
-        this.basedir = basedir;
     }
 
     public PkginfoFile( String arch, String category, String name, String pkg, String version )
     {
         this( arch, category, name, pkg, version, Option.<String>none(), Option.<String>none(),
-              Option.<String>none(), List.<String>nil(), Option.<String>none() );
+              Option.<String>none(), List.<String>nil() );
     }
 
     public static final F5<String, String, String, String, String, PkginfoFile> constructor =
@@ -91,32 +89,27 @@ public class PkginfoFile
 
     public PkginfoFile category( String category )
     {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
+        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes );
     }
 
     public PkginfoFile pstamp( Option<String> pstamp )
     {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
+        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes );
     }
 
     public PkginfoFile desc( Option<String> desc )
     {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
+        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes );
     }
 
     public PkginfoFile email( Option<String> email )
     {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
+        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes );
     }
 
     public PkginfoFile classes( List<String> classes )
     {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
-    }
-
-    public PkginfoFile basedir( Option<String> basedir )
-    {
-        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes, basedir );
+        return new PkginfoFile( arch, category, name, pkg, version, pstamp, desc, email, classes );
     }
 
     public List<String> toList()
@@ -133,7 +126,6 @@ public class PkginfoFile
             cons( pstamp.map( curry( concat, "PSTAMP=" ) ) ).
             cons( desc.map( curry( concat, "DESC=" ) ) ).
             cons( email.map( curry( concat, "EMAIL=" ) ) ).
-            cons( basedir.map( curry( concat, "BASEDIR=" ) ) ).
             cons( iif( List.<String>isNotEmpty_(), classes ).map( stringF ) );
 
         return Option.somes( list ).reverse();

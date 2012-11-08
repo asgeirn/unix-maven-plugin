@@ -47,8 +47,6 @@ public class FileScannerTest
         throws IOException
     {
         File base = new File( System.getProperty( "user.home" ) + "/.m2/repository" );
-        if (!base.isDirectory())
-            return;
         FileScanner scanner = new FileScanner( base, new String[]{"**/*.pkg"}, new String[0] );
 
 //        for ( File file : scanner.toStream() )

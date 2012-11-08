@@ -91,13 +91,13 @@ public class PrototypeFileTest
         prototypeFile.streamTo( stream );
 
         assertEquals( new LineFile().
-            add( "f none extract.jar=" + file( extractJarObject ) + " 0644 funnyuser nogroup" ).
+            add( "f none /extract.jar=" + file( extractJarObject ) + " 0644 funnyuser nogroup" ).
             add( "d none /opt ? default default" ).
             add( "d none /opt/jetty ? default default" ).
-            add( "f none opt/jetty/.bash_profile=" + file( bashProfileObject ) + " 0644 nouser nogroup" ).
+            add( "f none /opt/jetty/.bash_profile=" + file( bashProfileObject ) + " 0644 nouser nogroup" ).
             add( "d none /smf ? default default" ).
-            add( "f smf smf/manifest.xml=" + file( extractJarObject ) + " 0644 nouser nogroup" ).
-            add( "d none special 0755 nouser funnygroup" ).
+            add( "f smf /smf/manifest.xml=" + file( extractJarObject ) + " 0644 nouser nogroup" ).
+            add( "d none /special 0755 nouser funnygroup" ).
             toString(), stream.toString() );
     }
 

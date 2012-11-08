@@ -50,7 +50,7 @@
       <implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
       <configuration>
         <extension>pkg</extension>
-        <type>sysvpkg</type>
+        <type>pkg</type>
         <language>none</language>
         <addedToClasspath>false</addedToClasspath>
       </configuration>

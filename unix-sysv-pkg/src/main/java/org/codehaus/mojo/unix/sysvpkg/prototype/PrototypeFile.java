@@ -99,12 +99,12 @@ public class PrototypeFile
 
     public void addDirectory( UnixFsObject.Directory directory )
     {
-        fileSystem = fileSystem.addDirectory( new DirectoryEntry( findClassTag.f( directory.attributes ), some( true ), directory ) );
+        fileSystem = fileSystem.addDirectory( new DirectoryEntry( findClassTag.f( directory.attributes ), directory ) );
     }
 
     public void addFile( FileObject fromFile, UnixFsObject.RegularFile file )
     {
-        fileSystem = fileSystem.addFile( new FileEntry( findClassTag.f( file.attributes ), some( true ), file, some( asFile( fromFile ) ) ) );
+        fileSystem = fileSystem.addFile( new FileEntry( findClassTag.f( file.attributes ), some( false ), file, some( asFile( fromFile ) ) ) );
     }
 
     public void addSymlink( UnixFsObject.Symlink symlink )
