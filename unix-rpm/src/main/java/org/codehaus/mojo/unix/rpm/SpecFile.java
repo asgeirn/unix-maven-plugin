@@ -129,8 +129,8 @@ public class SpecFile
 
     public void addFile( UnixFsObject.RegularFile file )
     {
-        roots.add(file.path);
-        System.out.printf("Adding file %s to roots%n", file.path);
+        //roots.add(file.path);
+        //System.out.printf("Adding file %s to roots%n", file.path);
         fileSystem = fileSystem.addFile( new PlainPackageFileSystemObject( file ) );
     }
 
