@@ -27,6 +27,7 @@ package org.codehaus.mojo.unix.rpm;
 import static fj.Bottom.*;
 import fj.*;
 import static fj.Function.*;
+
 import fj.data.List;
 import fj.data.*;
 import static fj.data.Option.*;
@@ -47,7 +48,6 @@ import static org.joda.time.LocalDateTime.*;
 import java.io.*;
 import java.util.*;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * TODO: Split this file into two parts; a part which has all the meta data and one that has all the file data.
@@ -125,7 +125,7 @@ public class SpecFile
                              new PlainPackageFileSystemObject( defaultDirectory ) );
     }
 
-    private Set<RelativePath> roots = new HashSet<>();
+    private HashSet<RelativePath> roots = new HashSet<RelativePath>();
 
     public void addFile( UnixFsObject.RegularFile file )
     {
@@ -260,11 +260,13 @@ public class SpecFile
     {
         public Boolean f(final PackageFileSystemObject object )
         {
-            if (roots.stream().noneMatch(it -> object.getUnixFsObject().path.isBelowOrSame(it))) {
-                System.out.printf("WTF %s%n", object.getUnixFsObject().path);
-                return false;
+            for (RelativePath root : roots) {
+                if (object.getUnixFsObject().path.isBelowOrSame(root)) {
+                    return true;
+                }
             }
-            return !object.getUnixFsObject().path.isBase();
+            return false;
+            //return !object.getUnixFsObject().path.isBase();
         }
     };
 
