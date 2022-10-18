@@ -46,6 +46,8 @@ import static org.joda.time.LocalDateTime.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * TODO: Split this file into two parts; a part which has all the meta data and one that has all the file data.
@@ -128,8 +130,10 @@ public class SpecFile
         fileSystem = fileSystem.addFile( new PlainPackageFileSystemObject( file ) );
     }
 
+    private Set<RelativePath> roots = new HashSet<>();
     public void addDirectory( UnixFsObject.Directory directory )
     {
+        roots.add(directory.path);
         fileSystem = fileSystem.addDirectory( new PlainPackageFileSystemObject( directory ) );
     }
 
@@ -248,11 +252,14 @@ public class SpecFile
         };
     }
 
-    private static final F<PackageFileSystemObject<Object>, Boolean> excludePaths = new F<PackageFileSystemObject<Object>, Boolean>()
+    private final F<PackageFileSystemObject<Object>, Boolean> excludePaths = new F<PackageFileSystemObject<Object>, Boolean>()
     {
-        public Boolean f( PackageFileSystemObject object )
+        public Boolean f(final PackageFileSystemObject object )
         {
-            System.out.printf("WTF %s%n", object.getUnixFsObject().path);
+            if (roots.stream().noneMatch(it -> object.getUnixFsObject().path.isBelowOrSame(it))) {
+                System.out.printf("WTF %s%n", object.getUnixFsObject().path);
+                return false;
+            }
             return !object.getUnixFsObject().path.isBase();
         }
     };
