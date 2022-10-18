@@ -125,26 +125,18 @@ public class SpecFile
                              new PlainPackageFileSystemObject( defaultDirectory ) );
     }
 
-    private HashSet<RelativePath> roots = new HashSet<RelativePath>();
-
     public void addFile( UnixFsObject.RegularFile file )
     {
-        roots.add(file.path);
-        System.out.printf("Adding file %s to roots%n", file.path);
         fileSystem = fileSystem.addFile( new PlainPackageFileSystemObject( file ) );
     }
 
     public void addDirectory( UnixFsObject.Directory directory )
     {
-        roots.add(directory.path);
-        System.out.printf("Adding directory %s to roots%n", directory.path);
         fileSystem = fileSystem.addDirectory( new PlainPackageFileSystemObject( directory ) );
     }
 
     public void addSymlink( UnixFsObject.Symlink symlink )
     {
-        roots.add(symlink.path);
-        System.out.printf("Adding symlink %s to roots%n", symlink.path);
         fileSystem = fileSystem.addSymlink( new PlainPackageFileSystemObject( symlink ) );
     }
 
@@ -262,13 +254,7 @@ public class SpecFile
     {
         public Boolean f(final PackageFileSystemObject object )
         {
-            for (RelativePath root : roots) {
-                if (object.getUnixFsObject().path.isBelowOrSame(root)) {
-                    return true;
-                }
-            }
-            return false;
-            //return !object.getUnixFsObject().path.isBase();
+            return !object.getUnixFsObject().path.isBase();
         }
     };
 

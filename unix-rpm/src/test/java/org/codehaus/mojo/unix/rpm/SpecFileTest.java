@@ -115,7 +115,7 @@ public class SpecFileTest
             add( "%ghost %attr(0644,myuser,mygroup) /e" ).
             add( "%attr(0644,myuser,mygroup) /extract.jar" ).
             add( "%attr(0644,extract,mygroup) /extract2.jar" ).
-            //add( "%dir %attr(-,root,root) /usr" ).
+            add( "%dir %attr(-,root,root) /usr" ).
             add( "%dir %attr(0755,myuser,mygroup) /usr/bin" ).
             toString(), toString( specFile ) );
     }
