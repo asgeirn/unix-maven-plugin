@@ -252,7 +252,7 @@ public class SpecFile
     {
         public Boolean f( PackageFileSystemObject object )
         {
-            System.out.printf("WTF %s%n", object);
+            System.out.printf("WTF %s%n", object.getUnixFsObject().path);
             return !object.getUnixFsObject().path.isBase();
         }
     };
