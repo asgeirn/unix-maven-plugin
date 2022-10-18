@@ -125,15 +125,19 @@ public class SpecFile
                              new PlainPackageFileSystemObject( defaultDirectory ) );
     }
 
+    private Set<RelativePath> roots = new HashSet<>();
+
     public void addFile( UnixFsObject.RegularFile file )
     {
+        roots.add(file.path);
+        System.out.printf("Adding file %s to roots%n", file.path);
         fileSystem = fileSystem.addFile( new PlainPackageFileSystemObject( file ) );
     }
 
-    private Set<RelativePath> roots = new HashSet<>();
     public void addDirectory( UnixFsObject.Directory directory )
     {
         roots.add(directory.path);
+        System.out.printf("Adding directory %s to roots%n", directory.path);
         fileSystem = fileSystem.addDirectory( new PlainPackageFileSystemObject( directory ) );
     }
 
