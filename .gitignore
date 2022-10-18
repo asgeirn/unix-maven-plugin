@@ -10,3 +10,4 @@ target
 
 
 unix-maven-plugin/src/it/*/build.log
+.envrc
