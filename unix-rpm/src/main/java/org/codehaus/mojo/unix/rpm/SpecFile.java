@@ -143,6 +143,8 @@ public class SpecFile
 
     public void addSymlink( UnixFsObject.Symlink symlink )
     {
+        roots.add(symlink.path);
+        System.out.printf("Adding symlink %s to roots%n", symlink.path);
         fileSystem = fileSystem.addSymlink( new PlainPackageFileSystemObject( symlink ) );
     }
 
