@@ -85,9 +85,15 @@ public class RpmUnixPackage
         return this;
     }
 
-    public UnixPackage group( String group )
+    public RpmUnixPackage group( String group )
     {
         specFile.group = group;
+        return this;
+    }
+
+    public RpmUnixPackage prefix( String prefix )
+    {
+        specFile.prefix = prefix;
         return this;
     }
 

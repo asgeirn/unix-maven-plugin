@@ -129,10 +129,21 @@
       <name>Erik Drolshammer</name>
       <email>erik-dev@fjas.no</email>
     </contributor>
+    <contributor>
+      <name>Asgeir S. Nilsen</name>
+      <email>asgeir@duck.com</email>
+    </contributor>
   </contributors>
   <issueManagement>
     <url>https://github.com/trygvis/unix-maven-plugin/issues</url>
   </issueManagement>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/asgeirn/unix-maven-plugin</url>
+    </repository>
+  </distributionManagement>
   <licenses>
     <license>
       <name>Apache License 2</name>
@@ -185,16 +196,14 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
           <encoding>utf-8</encoding>
-          <source>1.5</source>
-          <target>1.5</target>
         </configuration>
       </plugin>
       <!--

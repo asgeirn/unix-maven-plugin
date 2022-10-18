@@ -45,6 +45,16 @@ public class RpmSpecificSettings
         this.group = fromNull( group );
     }
 
+    private Option<String> prefix = none();
+
+    public Option<String> getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = fromNull( prefix );
+    }
+
     public String toString()
     {
         return ToStringBuilder.reflectionToString( this, ToStringStyle.MULTI_LINE_STYLE );

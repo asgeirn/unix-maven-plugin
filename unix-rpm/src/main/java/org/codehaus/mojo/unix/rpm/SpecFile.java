@@ -167,6 +167,7 @@ public class SpecFile
             addIfNotEmpty( "Distribution: ", distribution ).
             add( "Group: " + UnixUtil.getField( "group", group ) ).
             addIfNotEmpty( "Packager: ", packager ).
+            addIfNotEmpty("Prefix:", prefix).
             addAllLines( prefix( provides, "Provides: " ) ).
             addAllLines( prefix( requires, "Requires: " ) ).
             addAllLines( prefix( conflicts, "Conflicts: " ) ).
@@ -251,6 +252,7 @@ public class SpecFile
     {
         public Boolean f( PackageFileSystemObject object )
         {
+            System.out.printf("WTF %s%n", object);
             return !object.getUnixFsObject().path.isBase();
         }
     };
