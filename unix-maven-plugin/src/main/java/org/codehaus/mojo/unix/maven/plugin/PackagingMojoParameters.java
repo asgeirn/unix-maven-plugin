@@ -42,6 +42,7 @@ public class PackagingMojoParameters
     public final Option<String> contact;
     public final Option<String> contactEmail;
     public final Option<String> architecture;
+    public final String scriptDir;
     public final Defaults defaults;
     public final List<AssemblyOp> assembly;
     public final List<Package> packages;
@@ -52,6 +53,7 @@ public class PackagingMojoParameters
                                     String contact,
                                     String contactEmail,
                                     String architecture,
+                                    String scriptDir,
                                     Defaults defaults,
                                     AssemblyOp[] assembly,
                                     Package[] packages )
@@ -63,6 +65,7 @@ public class PackagingMojoParameters
         this.contact = fromNull( contact );
         this.contactEmail = fromNull( contactEmail );
         this.architecture = fromNull( architecture );
+        this.scriptDir = scriptDir;
         this.defaults = defaults;
         this.assembly = assembly == null ? List.<AssemblyOp>nil() : list( assembly );
         this.packages = packages == null ? List.<Package>nil() : list( packages );

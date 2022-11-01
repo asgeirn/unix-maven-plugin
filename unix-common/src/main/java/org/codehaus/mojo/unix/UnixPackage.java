@@ -46,6 +46,8 @@ public abstract class UnixPackage
 
     private File basedir;
 
+    private String scriptDir;
+
     public UnixPackage( String packageFileExtension )
     {
         this.packageFileExtension = packageFileExtension;
@@ -63,6 +65,12 @@ public abstract class UnixPackage
         return this;
     }
 
+    public UnixPackage scriptDir( String scriptDir )
+    {
+        this.scriptDir = scriptDir;
+        return this;
+    }
+
     public UnixPackage basedir( File basedir )
     {
         this.basedir = basedir;
@@ -71,6 +79,10 @@ public abstract class UnixPackage
 
     public File getScripts()
     {
+        if (scriptDir != null && scriptDir.length() > 0) {
+            System.out.printf("Using scriptDir %s%n", scriptDir);
+            return new File(scriptDir);
+        }
         return new File( basedir, "src/main/unix/scripts" );
     }
 

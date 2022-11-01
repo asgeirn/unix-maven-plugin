@@ -71,6 +71,7 @@ public abstract class AbstractPackageAttachedMojo
                                                         contact,
                                                         contactEmail,
                                                         architecture,
+                                                        scriptDir,
                                                         defaults,
                                                         assembly,
                                                         null ),

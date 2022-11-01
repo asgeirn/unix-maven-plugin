@@ -210,7 +210,7 @@ public class MojoHelperTest
                                                                     new java.util.TreeMap<String, String>() );
 
         PackagingMojoParameters mojoParameters = new PackagingMojoParameters( mojoName, null, "Description", "A B",
-                                                                              "a@b.com", "all", new Defaults(),
+                                                                              "a@b.com", "all", null, new Defaults(),
                                                                               new AssemblyOp[0], new Package[0] );
 
         Package pakke = new Package();
