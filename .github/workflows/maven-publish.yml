@@ -25,15 +25,14 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Version Parser
+    - name: Parse version from tag
       id: version
-      uses: johngeorgewright/parse-version-action@v1.0.2
+      uses: release-kit/semver@v1
       with:
-        ref: ${{ github.ref }}
-        trim-start: v
+        input: ${{ github.ref_name }}
 
     - name: Set release version
-      run: mvn versions:set -DnewVersion=${{ steps.version.outputs.version }}
+      run: mvn versions:set -DnewVersion=${{ steps.version.outputs.full }}
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
