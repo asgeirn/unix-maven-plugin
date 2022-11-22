@@ -88,6 +88,8 @@ public class SpecFile
 
     public List<String> requires = List.nil();
 
+    public List<String> buildRequires = List.nil();
+
     public List<String> conflicts = List.nil();
 
     public String prefix;
@@ -189,6 +191,7 @@ public class SpecFile
             add( "Group: " + UnixUtil.getField( "group", group ) ).
             addIfNotEmpty( "Packager: ", packager ).
             addIfNotEmpty("Prefix:", prefix).
+            addAllLines( prefix( buildRequires, "BuildRequires: ")).
             addAllLines( prefix( provides, "Provides: " ) ).
             addAllLines( prefix( requires, "Requires: " ) ).
             addAllLines( prefix( conflicts, "Conflicts: " ) ).

@@ -55,6 +55,18 @@ public class RpmSpecificSettings
         this.prefix = fromNull( prefix );
     }
 
+    private Option<String> requires = none();
+
+    public Option<String> getRequires() { return requires; }
+
+    public void setRequires(String requires) { this.requires = fromNull( requires ); }
+
+    private Option<String> buildRequires = none();
+
+    public Option<String> getBuildRequires() { return buildRequires; }
+
+    public void setBuildRequires(String buildRequires) { this.buildRequires = fromNull( buildRequires); }
+
     public String toString()
     {
         return ToStringBuilder.reflectionToString( this, ToStringStyle.MULTI_LINE_STYLE );

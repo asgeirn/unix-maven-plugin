@@ -97,6 +97,18 @@ public class RpmUnixPackage
         return this;
     }
 
+    public RpmUnixPackage requires( String requires )
+    {
+        specFile.requires = specFile.requires.cons(requires);
+        return this;
+    }
+
+    public RpmUnixPackage buildRequires( String buildRequires )
+    {
+        specFile.buildRequires = specFile.buildRequires.cons(buildRequires);
+        return this;
+    }
+
     public UnixPackage workingDirectory( FileObject workingDirectory )
         throws FileSystemException
     {
