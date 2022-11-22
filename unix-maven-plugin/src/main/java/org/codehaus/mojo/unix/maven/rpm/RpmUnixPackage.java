@@ -97,15 +97,15 @@ public class RpmUnixPackage
         return this;
     }
 
-    public RpmUnixPackage requires( String requires )
+    public RpmUnixPackage requires( List<String> requires )
     {
-        specFile.requires = specFile.requires.cons(requires);
+        specFile.requires = specFile.requires.append(requires);
         return this;
     }
 
-    public RpmUnixPackage buildRequires( String buildRequires )
+    public RpmUnixPackage buildRequires( List<String> buildRequires )
     {
-        specFile.buildRequires = specFile.buildRequires.cons(buildRequires);
+        specFile.buildRequires = specFile.buildRequires.append(buildRequires);
         return this;
     }
 
