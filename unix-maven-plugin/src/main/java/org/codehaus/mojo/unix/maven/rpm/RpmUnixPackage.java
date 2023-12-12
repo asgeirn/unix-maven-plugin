@@ -103,6 +103,12 @@ public class RpmUnixPackage
         return this;
     }
 
+    public RpmUnixPackage conflicts( List<String> conflicts )
+    {
+        specFile.conflicts = specFile.conflicts.append(conflicts);
+        return this;
+    }
+
     public RpmUnixPackage buildRequires( List<String> buildRequires )
     {
         specFile.buildRequires = specFile.buildRequires.append(buildRequires);

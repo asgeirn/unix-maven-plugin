@@ -67,6 +67,16 @@ public class RpmSpecificSettings
 
     public void setBuildRequires(String buildRequires) { this.buildRequires = fromNull( buildRequires); }
 
+    private Option<String> conflicts = none();
+
+    public Option<String> getConflicts() {
+        return conflicts;
+    }
+
+    public void setConflicts(String conflicts) {
+        this.conflicts = fromNull(conflicts);
+    }
+
     public String toString()
     {
         return ToStringBuilder.reflectionToString( this, ToStringStyle.MULTI_LINE_STYLE );
