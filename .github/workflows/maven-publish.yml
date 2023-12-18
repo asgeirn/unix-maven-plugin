@@ -27,7 +27,7 @@ jobs:
 
     - name: Version Parser
       id: version
-      uses: asgeirn/parse-version-action@v1.0.0
+      uses: asgeirn/parse-version-action@v1.0.1
       with:
         ref: ${{ github.ref }}
         trim-start: v
