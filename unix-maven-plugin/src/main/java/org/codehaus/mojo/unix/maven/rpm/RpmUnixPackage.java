@@ -85,9 +85,39 @@ public class RpmUnixPackage
         return this;
     }
 
-    public UnixPackage group( String group )
+    public RpmUnixPackage group( String group )
     {
         specFile.group = group;
+        return this;
+    }
+
+    public RpmUnixPackage prefix( String prefix )
+    {
+        specFile.prefix = prefix;
+        return this;
+    }
+
+    public RpmUnixPackage requires( List<String> requires )
+    {
+        specFile.requires = specFile.requires.append(requires);
+        return this;
+    }
+
+    public RpmUnixPackage conflicts( List<String> conflicts )
+    {
+        specFile.conflicts = specFile.conflicts.append(conflicts);
+        return this;
+    }
+
+    public RpmUnixPackage obsoletes( List<String> obsoletes )
+    {
+        specFile.obsoletes = specFile.obsoletes.append(obsoletes);
+        return this;
+    }
+
+    public RpmUnixPackage buildRequires( List<String> buildRequires )
+    {
+        specFile.buildRequires = specFile.buildRequires.append(buildRequires);
         return this;
     }
 

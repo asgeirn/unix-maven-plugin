@@ -84,6 +84,11 @@ public abstract class AbstractUnixMojo
     protected String architecture;
 
     /**
+     * @parameter
+     */
+    protected String scriptDir;
+
+    /**
      * @parameter expression="${maven.unix.debug}"
      */
     protected boolean debug;

@@ -45,6 +45,47 @@ public class RpmSpecificSettings
         this.group = fromNull( group );
     }
 
+    private Option<String> prefix = none();
+
+    public Option<String> getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = fromNull( prefix );
+    }
+
+    private Option<String> requires = none();
+
+    public Option<String> getRequires() { return requires; }
+
+    public void setRequires(String requires) { this.requires = fromNull( requires ); }
+
+    private Option<String> buildRequires = none();
+
+    public Option<String> getBuildRequires() { return buildRequires; }
+
+    public void setBuildRequires(String buildRequires) { this.buildRequires = fromNull( buildRequires); }
+
+    private Option<String> conflicts = none();
+
+    public Option<String> getConflicts() {
+        return conflicts;
+    }
+
+    public void setConflicts(String conflicts) {
+        this.conflicts = fromNull(conflicts);
+    }
+    private Option<String> obsoletes = none();
+
+    public Option<String> getObsoletes() {
+        return obsoletes;
+    }
+
+    public void setObsoletes(String obsoletes) {
+        this.obsoletes = fromNull(obsoletes);
+    }
+
     public String toString()
     {
         return ToStringBuilder.reflectionToString( this, ToStringStyle.MULTI_LINE_STYLE );

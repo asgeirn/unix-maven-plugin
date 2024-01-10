@@ -50,6 +50,11 @@ public class RpmMojoUtil
         }
 
         return RpmUnixPackage.cast( unixPackage ).
-            group( rpm.getGroup().some() );
+            group( rpm.getGroup().some() ).
+            prefix( rpm.getPrefix().toNull() ).
+            requires( rpm.getRequires().toList() ).
+            conflicts( rpm.getConflicts().toList() ).
+            obsoletes( rpm.getObsoletes().toList() ).
+            buildRequires( rpm.getBuildRequires().toList() );
     }
 }

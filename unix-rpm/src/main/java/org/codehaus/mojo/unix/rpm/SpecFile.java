@@ -27,6 +27,7 @@ package org.codehaus.mojo.unix.rpm;
 import static fj.Bottom.*;
 import fj.*;
 import static fj.Function.*;
+
 import fj.data.List;
 import fj.data.*;
 import static fj.data.Option.*;
@@ -46,6 +47,7 @@ import static org.joda.time.LocalDateTime.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.HashSet;
 
 /**
  * TODO: Split this file into two parts; a part which has all the meta data and one that has all the file data.
@@ -86,7 +88,11 @@ public class SpecFile
 
     public List<String> requires = List.nil();
 
+    public List<String> buildRequires = List.nil();
+
     public List<String> conflicts = List.nil();
+
+    public List<String> obsoletes = List.nil();
 
     public String prefix;
 
@@ -123,18 +129,37 @@ public class SpecFile
                              new PlainPackageFileSystemObject( defaultDirectory ) );
     }
 
+    private HashSet<RelativePath> roots = new HashSet<RelativePath>();
+    private boolean addPath(RelativePath path) {
+        for (RelativePath root : roots) {
+            if (path.isBelowOrSame(root)) {
+                return false;
+            }
+        }
+        return roots.add(path);
+    }
+
     public void addFile( UnixFsObject.RegularFile file )
     {
+        if (addPath(file.path)) {
+            System.out.printf("Adding file %s to roots%n", file.path);
+        }
         fileSystem = fileSystem.addFile( new PlainPackageFileSystemObject( file ) );
     }
 
     public void addDirectory( UnixFsObject.Directory directory )
     {
+        if (addPath(directory.path)) {
+            System.out.printf("Adding directory %s to roots%n", directory.path);
+        }
         fileSystem = fileSystem.addDirectory( new PlainPackageFileSystemObject( directory ) );
     }
 
     public void addSymlink( UnixFsObject.Symlink symlink )
     {
+        if (addPath(symlink.path)) {
+            System.out.printf("Adding symlink %s to roots%n", symlink.path);
+        }
         fileSystem = fileSystem.addSymlink( new PlainPackageFileSystemObject( symlink ) );
     }
 
@@ -167,9 +192,12 @@ public class SpecFile
             addIfNotEmpty( "Distribution: ", distribution ).
             add( "Group: " + UnixUtil.getField( "group", group ) ).
             addIfNotEmpty( "Packager: ", packager ).
+            addIfNotEmpty("Prefix:", prefix).
+            addAllLines( prefix( buildRequires, "BuildRequires: ")).
             addAllLines( prefix( provides, "Provides: " ) ).
             addAllLines( prefix( requires, "Requires: " ) ).
             addAllLines( prefix( conflicts, "Conflicts: " ) ).
+            addAllLines( prefix( obsoletes, "Obsoletes: " ) ).
             addIfNotEmpty( fromNull( buildRoot ).map( compose( curry( concat, "BuildRoot: " ), getAbsolutePath ) ).orSome( "" ) ).
             add( "BuildArch: " + buildArch ).
             add();
@@ -247,11 +275,17 @@ public class SpecFile
         };
     }
 
-    private static final F<PackageFileSystemObject<Object>, Boolean> excludePaths = new F<PackageFileSystemObject<Object>, Boolean>()
+    private final F<PackageFileSystemObject<Object>, Boolean> excludePaths = new F<PackageFileSystemObject<Object>, Boolean>()
     {
-        public Boolean f( PackageFileSystemObject object )
+        public Boolean f(final PackageFileSystemObject object )
         {
-            return !object.getUnixFsObject().path.isBase();
+            for (RelativePath root : roots) {
+                if (object.getUnixFsObject().path.isBelowOrSame(root)) {
+                    return true;
+                }
+            }
+            return false;
+            //return !object.getUnixFsObject().path.isBase();
         }
     };
 

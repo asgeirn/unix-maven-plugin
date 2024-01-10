@@ -148,7 +148,8 @@ public abstract class MojoHelper
                     setVersion( version ).                      // TODO: This should go away
                     workingDirectory( packageRoot ).
                     debug( debug ).
-                    basedir( project.basedir );
+                    basedir( project.basedir ).
+                    scriptDir( mojoParameters.scriptDir );
 
                 // -----------------------------------------------------------------------
                 // Let the implementation add its metadata
