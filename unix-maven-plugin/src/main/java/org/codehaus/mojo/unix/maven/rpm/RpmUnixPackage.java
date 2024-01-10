@@ -109,6 +109,12 @@ public class RpmUnixPackage
         return this;
     }
 
+    public RpmUnixPackage obsoletes( List<String> obsoletes )
+    {
+        specFile.obsoletes = specFile.obsoletes.append(obsoletes);
+        return this;
+    }
+
     public RpmUnixPackage buildRequires( List<String> buildRequires )
     {
         specFile.buildRequires = specFile.buildRequires.append(buildRequires);

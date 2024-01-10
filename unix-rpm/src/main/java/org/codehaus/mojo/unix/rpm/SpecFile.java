@@ -92,6 +92,8 @@ public class SpecFile
 
     public List<String> conflicts = List.nil();
 
+    public List<String> obsoletes = List.nil();
+
     public String prefix;
 
     public File buildRoot;
@@ -195,6 +197,7 @@ public class SpecFile
             addAllLines( prefix( provides, "Provides: " ) ).
             addAllLines( prefix( requires, "Requires: " ) ).
             addAllLines( prefix( conflicts, "Conflicts: " ) ).
+            addAllLines( prefix( obsoletes, "Obsoletes: " ) ).
             addIfNotEmpty( fromNull( buildRoot ).map( compose( curry( concat, "BuildRoot: " ), getAbsolutePath ) ).orSome( "" ) ).
             add( "BuildArch: " + buildArch ).
             add();

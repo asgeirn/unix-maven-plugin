@@ -54,6 +54,7 @@ public class RpmMojoUtil
             prefix( rpm.getPrefix().toNull() ).
             requires( rpm.getRequires().toList() ).
             conflicts( rpm.getConflicts().toList() ).
+            obsoletes( rpm.getObsoletes().toList() ).
             buildRequires( rpm.getBuildRequires().toList() );
     }
 }

@@ -76,6 +76,15 @@ public class RpmSpecificSettings
     public void setConflicts(String conflicts) {
         this.conflicts = fromNull(conflicts);
     }
+    private Option<String> obsoletes = none();
+
+    public Option<String> getObsoletes() {
+        return obsoletes;
+    }
+
+    public void setObsoletes(String obsoletes) {
+        this.obsoletes = fromNull(obsoletes);
+    }
 
     public String toString()
     {
